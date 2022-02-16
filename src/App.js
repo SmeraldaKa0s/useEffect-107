@@ -1,23 +1,28 @@
-import logo from './logo.svg';
-import './App.css';
 
-function App() {
+import './App.css';
+import { useState, useEffect } from 'react'; 
+
+const App = () => {
+  const [episodios, setEpisodios] = useState([])
+  const [paginas, setPaginas] = useState(0);
+  //se pueden usar 2 estados para pedir información distinta al mismo fetch
+
+  useEffect(()=>{
+    fetch("https://rickandmortyapi.com/api/episode/")
+    .then(res => res.json())
+    .then((data) => {
+      setEpisodios(data.results)
+      setPaginas(data.info.pages);
+    });
+  },[])
+
+  console.log(episodios);
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div>
+      Cantidad de paginas: {paginas}
+      {episodios.map((episodio) => (
+        <h2>{episodio.name}</h2>
+      ))}
     </div>
   );
 }

@@ -1,6 +1,7 @@
 
 import './App.css';
 import { useState, useEffect } from 'react'; 
+import Lista from "./components/Lista"; 
 
 const App = () => {
   //se pueden usar 2 estados para pedir información distinta al mismo fetch
@@ -32,6 +33,8 @@ const App = () => {
       {episodios.map((episodio) => (
         <h2>{episodio.name}</h2>
       ))}
+
+      <Lista/> 
     </div>
   );
 }
